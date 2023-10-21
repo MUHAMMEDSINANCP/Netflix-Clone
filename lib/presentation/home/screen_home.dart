@@ -53,65 +53,65 @@ class ScreenHome extends StatelessWidget {
                     }
 
                     /// released Past Year
-                    final _releasedPastYear = state.pastYearMovieList.map((m) {
+                    final releasedPastYear = state.pastYearMovieList.map((m) {
                       return '$imageAppendUrl${m.posterPath}';
                     }).toList();
 
                     /// Trending
-                    final _trending = state.trendingMovieList.map((m) {
+                    final trending = state.trendingMovieList.map((m) {
                       return '$imageAppendUrl${m.posterPath}';
                     }).toList();
 
                     ///    Tense Daramas
-                    final _tenseDramas = state.tenseDramasMovieList.map((m) {
+                    final tenseDramas = state.tenseDramasMovieList.map((m) {
                       return '$imageAppendUrl${m.posterPath}';
                     }).toList();
 
                     /// South Indian Cinema
-                    final _southIndianMovies =
+                    final southIndianMovies =
                         state.southIndianMovieList.map((m) {
                       return '$imageAppendUrl${m.posterPath}';
                     }).toList();
 
-                    _southIndianMovies.shuffle();
+                    southIndianMovies.shuffle();
 
                     // top 10 tv shows
-                    final _top10TvShow = state.trendingTvList.map((t) {
+                    final top10TvShow = state.trendingTvList.map((t) {
                       return '$imageAppendUrl${t.posterPath}';
                     }).toList();
-                    _top10TvShow.shuffle();
+                    top10TvShow.shuffle();
 
                     // Listview
 
                     return ListView(
                       children: [
                         const BackGroundCard(),
-                        if (_releasedPastYear.length >= 10)
+                        if (releasedPastYear.length >= 10)
                           MainTitleCard(
-                            posterList: _releasedPastYear.sublist(0, 10),
+                            posterList: releasedPastYear.sublist(0, 10),
                             title: "Released in the past year",
                           ),
                         kHeight,
-                        if (_trending.length >= 10)
+                        if (trending.length >= 10)
                           MainTitleCard(
                             title: "Trending Now",
-                            posterList: _trending.sublist(0, 10),
+                            posterList: trending.sublist(0, 10),
                           ),
                         kHeight,
                         NumberTitleCard(
-                          postersList: _top10TvShow.sublist(0, 10),
+                          postersList: top10TvShow.sublist(0, 10),
                         ),
                         kHeight,
-                        if (_tenseDramas.length >= 10)
+                        if (tenseDramas.length >= 10)
                           MainTitleCard(
                             title: "Tense Dramas",
-                            posterList: _tenseDramas.sublist(0, 10),
+                            posterList: tenseDramas.sublist(0, 10),
                           ),
                         kHeight,
-                        if (_southIndianMovies.length >= 10)
+                        if (southIndianMovies.length >= 10)
                           MainTitleCard(
                             title: "South Indian Cinema",
-                            posterList: _southIndianMovies.sublist(0, 10),
+                            posterList: southIndianMovies.sublist(0, 10),
                           ),
                         kHeight,
                       ],
