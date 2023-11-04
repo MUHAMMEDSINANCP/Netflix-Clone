@@ -23,7 +23,7 @@ ValueNotifier<Set<int>> likedVideosIdsNotifier = ValueNotifier({});
 @injectable
 class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
   FastLaughBloc(
-    IDownloadsRepo _downloadService,
+    IDownloadsRepo downloadService,
   ) : super(FastLaughState.initial()) {
     on<Initialize>((event, emit) async {
       // Sending Loading to UI
@@ -33,9 +33,9 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
         isError: false,
       ));
       // get trending movies
-      final _result = await _downloadService.getDownloadsImages();
-      final _state = _result.fold((l) {
-        return FastLaughState(
+      final result = await downloadService.getDownloadsImages();
+      final state = result.fold((l) {
+        return const FastLaughState(
           videoslist: [],
           isLoading: false,
           isError: true,
@@ -47,7 +47,7 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
                 isError: false,
               ));
       // send to ui
-      emit(_state);
+      emit(state);
     });
 
     on<LikeVideo>((event, emit) async {

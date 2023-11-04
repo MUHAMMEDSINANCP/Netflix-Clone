@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/application/home/home_bloc.dart';
-import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/home/widgets/background_card.dart';
 import 'package:netflix_app/presentation/home/widgets/number_title_card.dart';
@@ -98,9 +95,10 @@ class ScreenHome extends StatelessWidget {
                             posterList: trending.sublist(0, 10),
                           ),
                         kHeight,
-                        NumberTitleCard(
-                          postersList: top10TvShow.sublist(0, 10),
-                        ),
+                        if (top10TvShow.length >= 10)
+                          NumberTitleCard(
+                            postersList: top10TvShow.sublist(0, 10),
+                          ),
                         kHeight,
                         if (tenseDramas.length >= 10)
                           MainTitleCard(
@@ -123,15 +121,19 @@ class ScreenHome extends StatelessWidget {
                         duration: const Duration(milliseconds: 1000),
                         width: double.infinity,
                         height: 90,
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withOpacity(0.5),
                         child: Column(
                           children: [
                             Row(
                               children: [
-                                Image.network(
-                                  "https://cdn.dribbble.com/users/9378043/screenshots/16832559/netflix__1_.png",
-                                  width: 60,
-                                  height: 60,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Image.network(
+                                    "https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png",
+                                    width: 80,
+                                    height: 60,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                                 const Spacer(),
                                 const Icon(
@@ -140,10 +142,10 @@ class ScreenHome extends StatelessWidget {
                                   size: 30,
                                 ),
                                 kWidth,
-                                Container(
-                                  width: 40,
-                                  height: 40,
-                                  color: Colors.blue,
+                                const Icon(
+                                  Icons.movie,
+                                  color: Colors.white,
+                                  size: 30,
                                 ),
                                 kWidth,
                               ],
@@ -164,11 +166,11 @@ class ScreenHome extends StatelessWidget {
                                   style: kHomeTitleText,
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       )
-                    : kHeight
+                    : kHeight,
               ],
             ),
           );

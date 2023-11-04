@@ -6,7 +6,8 @@ import 'package:netflix_app/presentation/widgets/main_title.dart';
 class MainTitleCard extends StatelessWidget {
   const MainTitleCard({
     Key? key,
-    required this.title, required this.posterList,
+    required this.title,
+    required this.posterList,
   }) : super(key: key);
   final String title;
   final List<String> posterList;
@@ -26,7 +27,9 @@ class MainTitleCard extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: List.generate(
               posterList.length,
-              (index) => MainCard(imageUrl: posterList[index],),
+              (index) => MainCard(
+                imageUrl: posterList[index],
+              ),
             ),
           ),
         ),

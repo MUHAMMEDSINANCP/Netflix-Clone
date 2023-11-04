@@ -17,7 +17,7 @@ class ScreenNewAndHot extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(90),
+          preferredSize: const Size.fromHeight(100),
           child: AppBar(
             title: const Text(
               "New & Hot",
@@ -26,17 +26,17 @@ class ScreenNewAndHot extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-            actions: [
-              const Icon(
+            actions: const [
+              Icon(
                 Icons.cast,
                 color: Colors.white,
                 size: 30,
               ),
               kWidth,
-              Container(
-                width: 40,
-                height: 40,
-                color: Colors.blue,
+              Icon(
+                Icons.tv,
+                color: Colors.white,
+                size: 30,
               ),
               kWidth,
             ],
@@ -60,14 +60,16 @@ class ScreenNewAndHot extends StatelessWidget {
                 ]),
           ),
         ),
-        body: const TabBarView(children: [
-          ComingSoonList(
-            key: Key('Coming Soon'),
-          ),
-          EveryoneIsWatchingList(
-            key: Key('Everyone is Watching'),
-          ),
-        ]),
+        body: const TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              ComingSoonList(
+                key: Key('Coming Soon'),
+              ),
+              EveryoneIsWatchingList(
+                key: Key('Everyone is Watching'),
+              ),
+            ]),
       ),
     );
   }
@@ -83,6 +85,8 @@ class ComingSoonList extends StatelessWidget {
     });
 
     return RefreshIndicator(
+      color: Colors.black54,
+      strokeWidth: 3,
       onRefresh: () async {
         BlocProvider.of<HotAndNewBloc>(context)
             .add(const LoadDataInComingSoon());
@@ -114,11 +118,12 @@ class ComingSoonList extends StatelessWidget {
                   if (movie.id == null) {
                     return const SizedBox();
                   }
-                  final _date = DateTime.parse(movie.releaseDate!);
-                  final formatedDate = DateFormat.yMMMMd('en_US').format(_date);
+                  final date = DateTime.parse(movie.releaseDate!);
+                  final formatedDate = DateFormat.yMMMMd('en_US').format(date);
                   final parts = formatedDate.split(' ');
                   final monthAbbreviation =
                       parts[0].substring(0, 3).toUpperCase();
+                  final isLastItem = index == state.comingSoonList.length - 1;
                   return ComingSoonWidget(
                     id: movie.id.toString(),
                     month: monthAbbreviation,
@@ -126,6 +131,7 @@ class ComingSoonList extends StatelessWidget {
                     posterPath: '$imageAppendUrl${movie.posterPath}',
                     movieName: movie.originalTitle ?? 'No Title',
                     description: movie.overview ?? 'No Description',
+                    isLastItem: isLastItem,
                   );
                 });
           }
@@ -146,9 +152,11 @@ class EveryoneIsWatchingList extends StatelessWidget {
     });
 
     return RefreshIndicator(
+      color: Colors.black54,
+      strokeWidth: 3,
       onRefresh: () async {
-         BlocProvider.of<HotAndNewBloc>(context)
-          .add(const LoadDataInEveryoneIsWatching());
+        BlocProvider.of<HotAndNewBloc>(context)
+            .add(const LoadDataInEveryoneIsWatching());
       },
       child: BlocBuilder<HotAndNewBloc, HotAndNewState>(
         builder: (context, state) {
@@ -179,12 +187,15 @@ class EveryoneIsWatchingList extends StatelessWidget {
                   if (movie.id == null) {
                     return const SizedBox();
                   }
-    
+
                   final tv = state.everyOneIsWatchingList[index];
+                  final isLastItem = index == state.comingSoonList.length - 1;
+
                   return EveryonesWatchingWidget(
                     posterPath: '$imageAppendUrl${tv.posterPath}',
                     movieName: tv.originalName ?? 'No Name provided',
                     description: tv.overview ?? 'No Description',
+                    isLastItem: isLastItem,
                   );
                 });
           }

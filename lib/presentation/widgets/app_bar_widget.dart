@@ -11,22 +11,25 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          title,
-          style: GoogleFonts.montserrat()
-              .copyWith(fontSize: 26, fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text(
+            title,
+            style: GoogleFonts.montserrat().copyWith(
+                fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ),
         const Spacer(),
         const Icon(
           Icons.cast,
           color: Colors.white,
-          size: 30,
+          size: 27,
         ),
         kWidth,
-        Container(
-          width: 40,
-          height: 40,
-          color: Colors.blue,
+        const Icon(
+          Icons.person,
+          color: Colors.white,
+          size: 30,
         ),
         kWidth,
       ],

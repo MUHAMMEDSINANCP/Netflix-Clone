@@ -17,7 +17,7 @@ class ScreenDownloads extends StatefulWidget {
 class _ScreenDownloadsState extends State<ScreenDownloads> {
   final _widgetList = [
     const _SmartDownloads(),
-    Section2(),
+    const Section2(),
     const Section3(),
   ];
   @override
@@ -46,7 +46,7 @@ class _ScreenDownloadsState extends State<ScreenDownloads> {
 }
 
 class Section2 extends StatelessWidget {
-  Section2({super.key});
+  const Section2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,12 @@ class _SmartDownloads extends StatelessWidget {
           color: kWhiteColor,
         ),
         kWidth,
-        Text("Smart Downloads")
+        Text(
+          "Smart Downloads",
+          style: TextStyle(
+            color: kWhiteColor,
+          ),
+        ),
       ],
     );
   }

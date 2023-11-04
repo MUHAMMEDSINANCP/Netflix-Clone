@@ -15,7 +15,7 @@ class SearchIdleWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SearchTextTitle(title: 'Top Searches'),
+        const SearchTextTitle(title: 'Top Searches'),
         kHeight,
         BlocBuilder<SearchBloc, SearchState>(
           builder: (context, state) {
@@ -72,8 +72,8 @@ class TopSearchItemTile extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: screenWidth * 0.35,
-          height: 65,
+          width: screenWidth * 0.38,
+          height: 80,
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
@@ -97,13 +97,16 @@ class TopSearchItemTile extends StatelessWidget {
         )),
         const CircleAvatar(
           backgroundColor: kWhiteColor,
-          radius: 25,
+          radius: 22,
           child: CircleAvatar(
             backgroundColor: kBlackColor,
-            radius: 23,
-            child: Icon(
-              CupertinoIcons.play_fill,
-              color: kWhiteColor,
+            radius: 20,
+            child: Padding(
+              padding: EdgeInsets.only(left: 4),
+              child: Icon(
+                CupertinoIcons.play_fill,
+                color: kWhiteColor,
+              ),
             ),
           ),
         )

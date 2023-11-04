@@ -12,7 +12,7 @@ class ComingSoonWidget extends StatelessWidget {
   final String posterPath;
   final String movieName;
   final String description;
-
+  final bool isLastItem;
   const ComingSoonWidget({
     super.key,
     required this.id,
@@ -21,6 +21,7 @@ class ComingSoonWidget extends StatelessWidget {
     required this.posterPath,
     required this.movieName,
     required this.description,
+    required this.isLastItem,
   });
 
   @override
@@ -47,7 +48,7 @@ class ComingSoonWidget extends StatelessWidget {
                 day,
                 style: const TextStyle(
                   fontSize: 30,
-                  letterSpacing: 4,
+                  letterSpacing: 1,
                   fontWeight: FontWeight.bold,
                   color: kWhiteColor,
                 ),
@@ -61,7 +62,9 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               VideoWidget(url: posterPath,),
+              VideoWidget(
+                url: posterPath,
+              ),
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -99,8 +102,8 @@ class ComingSoonWidget extends StatelessWidget {
               ),
               kHeight,
               Text(
-                " Coming on Friday $day $month",
-                style: const TextStyle(color: kWhiteColor),
+                " Coming on $day $month",
+                style: const TextStyle(color: Colors.grey),
               ),
               kHeight,
               Text(
@@ -119,6 +122,12 @@ class ComingSoonWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 16, color: kGreyColor),
               ),
+              kHeight20,
+              if (!isLastItem)
+                const Divider(
+                  height: 7,
+                  color: Colors.grey,
+                ),
             ],
           ),
         ),

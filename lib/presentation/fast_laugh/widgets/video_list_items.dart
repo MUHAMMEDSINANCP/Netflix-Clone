@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
 import 'package:share_plus/share_plus.dart';
@@ -60,7 +59,7 @@ class VideoListItem extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {},
                     icon: const Icon(
-                      Icons.volume_off,
+                      Icons.volume_up,
                       color: kWhiteColor,
                       size: 30,
                     ),
@@ -84,24 +83,27 @@ class VideoListItem extends StatelessWidget {
                       valueListenable: likedVideosIdsNotifier,
                       builder: (BuildContext c, Set<int> newLikedListIds,
                           Widget? _) {
-                        final _index = index;
-                        if (newLikedListIds.contains(_index)) {
+                        final indexx = index;
+                        if (newLikedListIds.contains(indexx)) {
                           return GestureDetector(
                             onTap: () {
                               // BlocProvider.of<FastLaughBloc>(context)
-                              //     .add(UnlikeVideo(id: _index));
-                              likedVideosIdsNotifier.value.remove(_index);
+                              //     .add(UnlikeVideo(id: indexx));
+                              likedVideosIdsNotifier.value.remove(indexx);
                               likedVideosIdsNotifier.notifyListeners();
                             },
                             child: const VideoActions(
-                                icon: Icons.favorite_rounded, title: 'Liked'),
+                              icon: Icons.favorite_rounded,
+                              title: 'Liked',
+                              color: Colors.red,
+                            ),
                           );
                         }
                         return GestureDetector(
                           onTap: () {
                             // BlocProvider.of<FastLaughBloc>(context)
                             //       .add(LikeVideo(id: _index));
-                            likedVideosIdsNotifier.value.add(_index);
+                            likedVideosIdsNotifier.value.add(indexx);
                             likedVideosIdsNotifier.notifyListeners();
                           },
                           child: const VideoActions(
@@ -137,8 +139,14 @@ class VideoListItem extends StatelessWidget {
 
 class VideoActions extends StatelessWidget {
   final IconData icon;
+  final Color color;
   final String title;
-  const VideoActions({super.key, required this.icon, required this.title});
+  const VideoActions({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.color = Colors.white,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +156,7 @@ class VideoActions extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Colors.white,
+            color: color,
             size: 30,
           ),
           Text(

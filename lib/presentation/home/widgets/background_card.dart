@@ -33,7 +33,7 @@ class BackGroundCard extends StatelessWidget {
                   icon: Icons.add,
                   title: "My List",
                 ),
-                _PlayButton(),
+                _playButton(),
                 const CustomButtonWidget(
                   icon: Icons.info,
                   title: "Info",
@@ -46,7 +46,7 @@ class BackGroundCard extends StatelessWidget {
     );
   }
 
-  TextButton _PlayButton() {
+  TextButton _playButton() {
     return TextButton.icon(
       onPressed: () {},
       style:
