@@ -5,7 +5,7 @@ import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/home/widgets/custom_button_widget.dart';
 import 'package:netflix_app/presentation/widgets/video_widget.dart';
 
-class ComingSoonWidget extends StatelessWidget {
+class ComingSoonWidget extends StatefulWidget {
   final String id;
   final String month;
   final String day;
@@ -13,8 +13,9 @@ class ComingSoonWidget extends StatelessWidget {
   final String movieName;
   final String description;
   final bool isLastItem;
+
   const ComingSoonWidget({
-    super.key,
+    Key? key,
     required this.id,
     required this.month,
     required this.day,
@@ -22,7 +23,14 @@ class ComingSoonWidget extends StatelessWidget {
     required this.movieName,
     required this.description,
     required this.isLastItem,
-  });
+  }) : super(key: key);
+
+  @override
+  ComingSoonWidgetState createState() => ComingSoonWidgetState();
+}
+
+class ComingSoonWidgetState extends State<ComingSoonWidget> {
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +39,21 @@ class ComingSoonWidget extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          height: 450,
-          width: 50,
+          height: 680,
+          width: 60,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                month,
+                widget.month,
                 style: const TextStyle(
                   fontSize: 16,
                   color: kGreyColor,
                 ),
               ),
               Text(
-                day,
+                widget.day,
                 style: const TextStyle(
                   fontSize: 30,
                   letterSpacing: 1,
@@ -57,25 +65,28 @@ class ComingSoonWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: size.width - 50,
-          height: 450,
+          width: size.width - 60,
+          height: 700,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VideoWidget(
-                url: posterPath,
+              Expanded(
+                child: VideoWidget(
+                  url: widget.posterPath,
+                  height: 400, // Specify the height for VideoWidget
+                ),
               ),
               Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Text(
-                      movieName,
-                      maxLines: 1,
+                      widget.movieName,
+                      maxLines: 2,
                       overflow: TextOverflow.clip,
-                      style: const TextStyle(
-                        letterSpacing: -5,
-                        fontSize: 35,
+                      style: TextStyle(
+                        color: kWhiteColor.withOpacity(0.5),
+                        letterSpacing: -2,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -102,32 +113,40 @@ class ComingSoonWidget extends StatelessWidget {
               ),
               kHeight,
               Text(
-                " Coming on $day $month",
+                " Coming on ${widget.day} ${widget.month}",
                 style: const TextStyle(color: Colors.grey),
               ),
               kHeight,
+              // Add Read More/Read Less functionality to the description
               Text(
-                movieName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: kWhiteColor),
-              ),
-              kHeight,
-              Text(
-                description,
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
+                isExpanded
+                    ? widget.description
+                    : widget.description.substring(
+                        0, 100), // Display only a part of the description
                 style: const TextStyle(fontSize: 16, color: kGreyColor),
               ),
+              if (widget.description.length > 100) ...[
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isExpanded = !isExpanded;
+                    });
+                  },
+                  child: Text(
+                    isExpanded ? "Read Less" : "Read More",
+                    style: TextStyle(
+                        color: Colors.redAccent
+                            .shade200), // Customize the text style as needed
+                  ),
+                ),
+              ],
               kHeight20,
-              if (!isLastItem)
+              if (!widget.isLastItem)
                 const Divider(
                   height: 7,
                   color: Colors.grey,
                 ),
+              kHeight20
             ],
           ),
         ),

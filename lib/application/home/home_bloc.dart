@@ -1,5 +1,3 @@
-
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -11,7 +9,6 @@ import '../../domain/hot_and_new/model/hot_and_new.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 part 'home_bloc.freezed.dart';
-
 
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -26,11 +23,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       // Send Loading to UI
       emit(state.copyWith(isLoading: true, hasError: false));
       // get Data
-      final _movieResult = await _homeService.getHotAndNewMovieData();
-      final _tvResult = await _homeService.getHotAndNewTvData();
+      final movieResult = await _homeService.getHotAndNewMovieData();
+      final tvResult = await _homeService.getHotAndNewTvData();
       // transform Data
 
-      final _state1 = _movieResult.fold((MainFailure failure) {
+      final state1 = movieResult.fold((MainFailure failure) {
         return HomeState(
             pastYearMovieList: [],
             trendingMovieList: [],
@@ -61,9 +58,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             isLoading: false,
             hasError: false);
       });
-      emit(_state1);
+      emit(state1);
 
-      final _state2 = _tvResult.fold(
+      final state2 = tvResult.fold(
         (MainFailure failure) {
           return HomeState(
               stateId: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -91,7 +88,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       // Send to UI
 
-      emit(_state2);
+      emit(state2);
     });
   }
 }

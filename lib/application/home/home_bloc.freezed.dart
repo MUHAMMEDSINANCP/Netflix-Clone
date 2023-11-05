@@ -68,25 +68,25 @@ class _$HomeEventCopyWithImpl<$Res, $Val extends HomeEvent>
 }
 
 /// @nodoc
-abstract class _$$GetHomeScreenDataCopyWith<$Res> {
-  factory _$$GetHomeScreenDataCopyWith(
-          _$GetHomeScreenData value, $Res Function(_$GetHomeScreenData) then) =
-      __$$GetHomeScreenDataCopyWithImpl<$Res>;
+abstract class _$$GetHomeScreenDataImplCopyWith<$Res> {
+  factory _$$GetHomeScreenDataImplCopyWith(_$GetHomeScreenDataImpl value,
+          $Res Function(_$GetHomeScreenDataImpl) then) =
+      __$$GetHomeScreenDataImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetHomeScreenDataCopyWithImpl<$Res>
-    extends _$HomeEventCopyWithImpl<$Res, _$GetHomeScreenData>
-    implements _$$GetHomeScreenDataCopyWith<$Res> {
-  __$$GetHomeScreenDataCopyWithImpl(
-      _$GetHomeScreenData _value, $Res Function(_$GetHomeScreenData) _then)
+class __$$GetHomeScreenDataImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$GetHomeScreenDataImpl>
+    implements _$$GetHomeScreenDataImplCopyWith<$Res> {
+  __$$GetHomeScreenDataImplCopyWithImpl(_$GetHomeScreenDataImpl _value,
+      $Res Function(_$GetHomeScreenDataImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GetHomeScreenData implements GetHomeScreenData {
-  const _$GetHomeScreenData();
+class _$GetHomeScreenDataImpl implements GetHomeScreenData {
+  const _$GetHomeScreenDataImpl();
 
   @override
   String toString() {
@@ -96,7 +96,7 @@ class _$GetHomeScreenData implements GetHomeScreenData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetHomeScreenData);
+        (other.runtimeType == runtimeType && other is _$GetHomeScreenDataImpl);
   }
 
   @override
@@ -160,7 +160,7 @@ class _$GetHomeScreenData implements GetHomeScreenData {
 }
 
 abstract class GetHomeScreenData implements HomeEvent {
-  const factory GetHomeScreenData() = _$GetHomeScreenData;
+  const factory GetHomeScreenData() = _$GetHomeScreenDataImpl;
 }
 
 /// @nodoc
@@ -259,10 +259,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -277,10 +278,11 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -295,7 +297,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? hasError = null,
   }) {
-    return _then(_$_Initial(
+    return _then(_$InitialImpl(
       stateId: null == stateId
           ? _value.stateId
           : stateId // ignore: cast_nullable_to_non_nullable
@@ -334,8 +336,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial(
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl(
       {required this.stateId,
       required final List<HotAndNewData> pastYearMovieList,
       required final List<HotAndNewData> trendingMovieList,
@@ -410,7 +412,7 @@ class _$_Initial implements _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$InitialImpl &&
             (identical(other.stateId, stateId) || other.stateId == stateId) &&
             const DeepCollectionEquality()
                 .equals(other._pastYearMovieList, _pastYearMovieList) &&
@@ -443,8 +445,8 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
 abstract class _Initial implements HomeState {
@@ -456,7 +458,7 @@ abstract class _Initial implements HomeState {
       required final List<HotAndNewData> southIndianMovieList,
       required final List<HotAndNewData> trendingTvList,
       required final bool isLoading,
-      required final bool hasError}) = _$_Initial;
+      required final bool hasError}) = _$InitialImpl;
 
   @override
   String get stateId;
@@ -476,6 +478,6 @@ abstract class _Initial implements HomeState {
   bool get hasError;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

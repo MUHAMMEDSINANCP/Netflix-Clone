@@ -29,7 +29,7 @@ class SearchIdleWidget extends StatelessWidget {
                   } else if (state.isError) {
                     return const Center(
                       child: Text(
-                        'Error while getting data',
+                        'Oops!😒 Error while getting data',
                         style: TextStyle(color: Colors.white),
                       ),
                     );

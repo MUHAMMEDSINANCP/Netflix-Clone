@@ -25,11 +25,10 @@ class HotAndNewBloc extends Bloc<HotAndNewEvent, HotAndNewState> {
           hasError: false));
 
       // get data from remote
+      final result = await _hotAndNewService.getHotAndNewMovieData();
+      // data to state
 
-      final _result = await _hotAndNewService.getHotAndNewMovieData();
-
-// data to state
-      final newState = _result.fold((MainFailure failure) {
+      final newState = result.fold((MainFailure failure) {
         return const HotAndNewState(
             comingSoonList: [],
             everyOneIsWatchingList: [],
@@ -59,10 +58,10 @@ class HotAndNewBloc extends Bloc<HotAndNewEvent, HotAndNewState> {
 
       // get data from remote
 
-      final _result = await _hotAndNewService.getHotAndNewTvData();
+      final result = await _hotAndNewService.getHotAndNewTvData();
 
 // data to state
-      final newState = _result.fold((MainFailure failure) {
+      final newState = result.fold((MainFailure failure) {
         return const HotAndNewState(
             comingSoonList: [],
             everyOneIsWatchingList: [],

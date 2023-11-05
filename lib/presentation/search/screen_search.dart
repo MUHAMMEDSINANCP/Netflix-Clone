@@ -17,47 +17,54 @@ class ScreenSearch extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<SearchBloc>(context).add(const Initialize());
     });
-    return Scaffold(
-        body: SafeArea(
-            child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CupertinoSearchTextField(
-            backgroundColor: Colors.grey.withOpacity(0.4),
-            prefixIcon: const Icon(
-              CupertinoIcons.search,
-              color: Colors.grey,
+    return RefreshIndicator(
+      color: Colors.black54,
+      strokeWidth: 3,
+      onRefresh: () async {
+        BlocProvider.of<SearchBloc>(context).add(const Initialize());
+      },
+      child: Scaffold(
+          body: SafeArea(
+              child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CupertinoSearchTextField(
+              backgroundColor: Colors.grey.withOpacity(0.4),
+              prefixIcon: const Icon(
+                CupertinoIcons.search,
+                color: Colors.grey,
+              ),
+              suffixIcon: const Icon(
+                CupertinoIcons.xmark_circle_fill,
+                color: Colors.grey,
+              ),
+              style: const TextStyle(color: Colors.white),
+              onChanged: (value) {
+                if (value.isEmpty) {
+                  return;
+                }
+                _debouncer.run(() {
+                  BlocProvider.of<SearchBloc>(context)
+                      .add(SearchMovie(movieQuery: value));
+                });
+              },
             ),
-            suffixIcon: const Icon(
-              CupertinoIcons.xmark_circle_fill,
-              color: Colors.grey,
-            ),
-            style: const TextStyle(color: Colors.white),
-            onChanged: (value) {
-              if (value.isEmpty) {
-                return;
-              }
-              _debouncer.run(() {
-                BlocProvider.of<SearchBloc>(context)
-                    .add(SearchMovie(movieQuery: value));
-              });
-            },
-          ),
-          kHeight,
-          Expanded(child: BlocBuilder<SearchBloc, SearchState>(
-            builder: (context, state) {
-              if (state.searchResultList.isEmpty) {
-                return const SearchIdleWidget();
-              } else {
-                return const SearchResultWidget();
-              }
-            },
-          )),
-          // const Expanded(child: SearchResultWidget()),
-        ],
-      ),
-    )));
+            kHeight,
+            Expanded(child: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.searchResultList.isEmpty) {
+                  return const SearchIdleWidget();
+                } else {
+                  return const SearchResultWidget();
+                }
+              },
+            )),
+            // const Expanded(child: SearchResultWidget()),
+          ],
+        ),
+      ))),
+    );
   }
 }

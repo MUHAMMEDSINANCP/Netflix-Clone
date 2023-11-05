@@ -5,8 +5,8 @@ import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/search/widgets/title.dart';
 
 // testing
-const tempimageUrl =
-    "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/yb6UB4WC3znlwU0L4AqMnjR9G9S.jpg";
+// const tempimageUrl =
+//     "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/yb6UB4WC3znlwU0L4AqMnjR9G9S.jpg";
 
 class SearchResultWidget extends StatelessWidget {
   const SearchResultWidget({super.key});
@@ -31,10 +31,8 @@ class SearchResultWidget extends StatelessWidget {
                   20,
                   (index) {
                     final movie = state.searchResultList[index];
-                    return const MainCard(
-                      // testing
-                      // imageUrl: movie.posterImageUrl,
-                      imageUrl: tempimageUrl,
+                    return MainCard(
+                      imageUrl: movie.posterImageUrl,
                     );
                   },
                 ),

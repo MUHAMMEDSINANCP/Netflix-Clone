@@ -1,22 +1,19 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:netflix_app/domain/core/failures/main_failure.dart';
-import 'package:netflix_app/domain/downloads/i_downloads_repo.dart';
+import 'package:netflix_app/domain/downloads/downloads_service.dart';
 import 'package:netflix_app/domain/search/search_service.dart';
-
 import '../../domain/downloads/models/downloads.dart';
 import '../../domain/search/model/search_response/search_response/search_response.dart';
-
 part 'search_event.dart';
 part 'search_state.dart';
 part 'search_bloc.freezed.dart';
 
 @injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final IDownloadsRepo _downloadsService;
+  final DownloadsService _downloadsService;
   final SearchService _searchService;
   SearchBloc(
     this._downloadsService,
@@ -37,8 +34,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         isError: false,
       ));
       // get trending
-      final _result = await _downloadsService.getDownloadsImages();
-      _result.fold((MainFailure f) {
+      final result = await _downloadsService.getDownloadsImages();
+      result.fold((MainFailure f) {
         emit(const SearchState(
           searchResultList: [],
           idleList: [],
@@ -67,9 +64,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         isLoading: true,
         isError: false,
       ));
-      final _result =
+      final result =
           await _searchService.searchMovies(movieQuery: event.movieQuery);
-      _result.fold(
+      result.fold(
         (MainFailure f) {
           emit(const SearchState(
             searchResultList: [],

@@ -7,7 +7,6 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/constants.dart';
-import '../../fast_laugh/widgets/video_list_items.dart';
 
 class EveryonesWatchingWidget extends StatelessWidget {
   final String posterPath;
@@ -44,6 +43,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
         kHeight50,
         VideoWidget(
           url: posterPath,
+          height: 500,
         ),
         kHeight,
         Row(

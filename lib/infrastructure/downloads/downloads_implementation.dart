@@ -5,11 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:netflix_app/domain/core/api_end_points.dart';
 import 'package:netflix_app/domain/core/failures/main_failure.dart';
-import 'package:netflix_app/domain/downloads/i_downloads_repo.dart';
+import 'package:netflix_app/domain/downloads/downloads_service.dart';
 import 'package:netflix_app/domain/downloads/models/downloads.dart';
 
-@LazySingleton(as: IDownloadsRepo)
-class DownloadRepository implements IDownloadsRepo {
+@LazySingleton(as: DownloadsService)
+class DownloadRepository implements DownloadsService {
   @override
   Future<Either<MainFailure, List<Downloads>>> getDownloadsImages() async {
     try {
@@ -20,7 +20,7 @@ class DownloadRepository implements IDownloadsRepo {
           return Downloads.fromJson(e);
         }).toList();
 
-        print(downloadList);
+        // print(downloadList);
         return Right(downloadList);
       } else {
         return const Left(MainFailure.serverFailure());

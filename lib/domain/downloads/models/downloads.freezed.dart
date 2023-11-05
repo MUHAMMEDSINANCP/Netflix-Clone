@@ -71,10 +71,11 @@ class _$DownloadsCopyWithImpl<$Res, $Val extends Downloads>
 }
 
 /// @nodoc
-abstract class _$$_DownloadsCopyWith<$Res> implements $DownloadsCopyWith<$Res> {
-  factory _$$_DownloadsCopyWith(
-          _$_Downloads value, $Res Function(_$_Downloads) then) =
-      __$$_DownloadsCopyWithImpl<$Res>;
+abstract class _$$DownloadsImplCopyWith<$Res>
+    implements $DownloadsCopyWith<$Res> {
+  factory _$$DownloadsImplCopyWith(
+          _$DownloadsImpl value, $Res Function(_$DownloadsImpl) then) =
+      __$$DownloadsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -83,11 +84,11 @@ abstract class _$$_DownloadsCopyWith<$Res> implements $DownloadsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DownloadsCopyWithImpl<$Res>
-    extends _$DownloadsCopyWithImpl<$Res, _$_Downloads>
-    implements _$$_DownloadsCopyWith<$Res> {
-  __$$_DownloadsCopyWithImpl(
-      _$_Downloads _value, $Res Function(_$_Downloads) _then)
+class __$$DownloadsImplCopyWithImpl<$Res>
+    extends _$DownloadsCopyWithImpl<$Res, _$DownloadsImpl>
+    implements _$$DownloadsImplCopyWith<$Res> {
+  __$$DownloadsImplCopyWithImpl(
+      _$DownloadsImpl _value, $Res Function(_$DownloadsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +97,7 @@ class __$$_DownloadsCopyWithImpl<$Res>
     Object? posterPath = freezed,
     Object? title = freezed,
   }) {
-    return _then(_$_Downloads(
+    return _then(_$DownloadsImpl(
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -111,13 +112,13 @@ class __$$_DownloadsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Downloads implements _Downloads {
-  const _$_Downloads(
+class _$DownloadsImpl implements _Downloads {
+  const _$DownloadsImpl(
       {@JsonKey(name: "poster_path") required this.posterPath,
       @JsonKey(name: "title") required this.title});
 
-  factory _$_Downloads.fromJson(Map<String, dynamic> json) =>
-      _$$_DownloadsFromJson(json);
+  factory _$DownloadsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DownloadsImplFromJson(json);
 
   @override
   @JsonKey(name: "poster_path")
@@ -135,7 +136,7 @@ class _$_Downloads implements _Downloads {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Downloads &&
+            other is _$DownloadsImpl &&
             (identical(other.posterPath, posterPath) ||
                 other.posterPath == posterPath) &&
             (identical(other.title, title) || other.title == title));
@@ -148,12 +149,12 @@ class _$_Downloads implements _Downloads {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadsCopyWith<_$_Downloads> get copyWith =>
-      __$$_DownloadsCopyWithImpl<_$_Downloads>(this, _$identity);
+  _$$DownloadsImplCopyWith<_$DownloadsImpl> get copyWith =>
+      __$$DownloadsImplCopyWithImpl<_$DownloadsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DownloadsToJson(
+    return _$$DownloadsImplToJson(
       this,
     );
   }
@@ -162,10 +163,10 @@ class _$_Downloads implements _Downloads {
 abstract class _Downloads implements Downloads {
   const factory _Downloads(
       {@JsonKey(name: "poster_path") required final String? posterPath,
-      @JsonKey(name: "title") required final String? title}) = _$_Downloads;
+      @JsonKey(name: "title") required final String? title}) = _$DownloadsImpl;
 
   factory _Downloads.fromJson(Map<String, dynamic> json) =
-      _$_Downloads.fromJson;
+      _$DownloadsImpl.fromJson;
 
   @override
   @JsonKey(name: "poster_path")
@@ -175,6 +176,6 @@ abstract class _Downloads implements Downloads {
   String? get title;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadsCopyWith<_$_Downloads> get copyWith =>
+  _$$DownloadsImplCopyWith<_$DownloadsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

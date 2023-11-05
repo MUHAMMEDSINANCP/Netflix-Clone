@@ -69,25 +69,25 @@ class _$DownloadsEventCopyWithImpl<$Res, $Val extends DownloadsEvent>
 }
 
 /// @nodoc
-abstract class _$$_GetDownloadsImageCopyWith<$Res> {
-  factory _$$_GetDownloadsImageCopyWith(_$_GetDownloadsImage value,
-          $Res Function(_$_GetDownloadsImage) then) =
-      __$$_GetDownloadsImageCopyWithImpl<$Res>;
+abstract class _$$GetDownloadsImageImplCopyWith<$Res> {
+  factory _$$GetDownloadsImageImplCopyWith(_$GetDownloadsImageImpl value,
+          $Res Function(_$GetDownloadsImageImpl) then) =
+      __$$GetDownloadsImageImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetDownloadsImageCopyWithImpl<$Res>
-    extends _$DownloadsEventCopyWithImpl<$Res, _$_GetDownloadsImage>
-    implements _$$_GetDownloadsImageCopyWith<$Res> {
-  __$$_GetDownloadsImageCopyWithImpl(
-      _$_GetDownloadsImage _value, $Res Function(_$_GetDownloadsImage) _then)
+class __$$GetDownloadsImageImplCopyWithImpl<$Res>
+    extends _$DownloadsEventCopyWithImpl<$Res, _$GetDownloadsImageImpl>
+    implements _$$GetDownloadsImageImplCopyWith<$Res> {
+  __$$GetDownloadsImageImplCopyWithImpl(_$GetDownloadsImageImpl _value,
+      $Res Function(_$GetDownloadsImageImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetDownloadsImage implements _GetDownloadsImage {
-  const _$_GetDownloadsImage();
+class _$GetDownloadsImageImpl implements _GetDownloadsImage {
+  const _$GetDownloadsImageImpl();
 
   @override
   String toString() {
@@ -97,7 +97,7 @@ class _$_GetDownloadsImage implements _GetDownloadsImage {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetDownloadsImage);
+        (other.runtimeType == runtimeType && other is _$GetDownloadsImageImpl);
   }
 
   @override
@@ -161,7 +161,7 @@ class _$_GetDownloadsImage implements _GetDownloadsImage {
 }
 
 abstract class _GetDownloadsImage implements DownloadsEvent {
-  const factory _GetDownloadsImage() = _$_GetDownloadsImage;
+  const factory _GetDownloadsImage() = _$GetDownloadsImageImpl;
 }
 
 /// @nodoc
@@ -224,11 +224,11 @@ class _$DownloadsStateCopyWithImpl<$Res, $Val extends DownloadsState>
 }
 
 /// @nodoc
-abstract class _$$_DownloadsStateCopyWith<$Res>
+abstract class _$$DownloadsStateImplCopyWith<$Res>
     implements $DownloadsStateCopyWith<$Res> {
-  factory _$$_DownloadsStateCopyWith(
-          _$_DownloadsState value, $Res Function(_$_DownloadsState) then) =
-      __$$_DownloadsStateCopyWithImpl<$Res>;
+  factory _$$DownloadsStateImplCopyWith(_$DownloadsStateImpl value,
+          $Res Function(_$DownloadsStateImpl) then) =
+      __$$DownloadsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -239,11 +239,11 @@ abstract class _$$_DownloadsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DownloadsStateCopyWithImpl<$Res>
-    extends _$DownloadsStateCopyWithImpl<$Res, _$_DownloadsState>
-    implements _$$_DownloadsStateCopyWith<$Res> {
-  __$$_DownloadsStateCopyWithImpl(
-      _$_DownloadsState _value, $Res Function(_$_DownloadsState) _then)
+class __$$DownloadsStateImplCopyWithImpl<$Res>
+    extends _$DownloadsStateCopyWithImpl<$Res, _$DownloadsStateImpl>
+    implements _$$DownloadsStateImplCopyWith<$Res> {
+  __$$DownloadsStateImplCopyWithImpl(
+      _$DownloadsStateImpl _value, $Res Function(_$DownloadsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -253,7 +253,7 @@ class __$$_DownloadsStateCopyWithImpl<$Res>
     Object? downloads = null,
     Object? downloadsFailureOrSuccessOption = null,
   }) {
-    return _then(_$_DownloadsState(
+    return _then(_$DownloadsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -272,8 +272,8 @@ class __$$_DownloadsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadsState implements _DownloadsState {
-  const _$_DownloadsState(
+class _$DownloadsStateImpl implements _DownloadsState {
+  const _$DownloadsStateImpl(
       {required this.isLoading,
       required final List<Downloads> downloads,
       required this.downloadsFailureOrSuccessOption})
@@ -302,7 +302,7 @@ class _$_DownloadsState implements _DownloadsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadsState &&
+            other is _$DownloadsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             const DeepCollectionEquality()
@@ -323,8 +323,9 @@ class _$_DownloadsState implements _DownloadsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadsStateCopyWith<_$_DownloadsState> get copyWith =>
-      __$$_DownloadsStateCopyWithImpl<_$_DownloadsState>(this, _$identity);
+  _$$DownloadsStateImplCopyWith<_$DownloadsStateImpl> get copyWith =>
+      __$$DownloadsStateImplCopyWithImpl<_$DownloadsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _DownloadsState implements DownloadsState {
@@ -332,7 +333,7 @@ abstract class _DownloadsState implements DownloadsState {
       {required final bool isLoading,
       required final List<Downloads> downloads,
       required final Option<Either<MainFailure, List<Downloads>>>
-          downloadsFailureOrSuccessOption}) = _$_DownloadsState;
+          downloadsFailureOrSuccessOption}) = _$DownloadsStateImpl;
 
   @override
   bool get isLoading;
@@ -343,6 +344,6 @@ abstract class _DownloadsState implements DownloadsState {
       get downloadsFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadsStateCopyWith<_$_DownloadsState> get copyWith =>
+  _$$DownloadsStateImplCopyWith<_$DownloadsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

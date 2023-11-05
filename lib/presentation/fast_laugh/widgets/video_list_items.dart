@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_types_as_parameter_names
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
 import 'package:share_plus/share_plus.dart';
@@ -73,6 +76,7 @@ class VideoListItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
                         radius: 30,
                         backgroundImage: posterPath == null
                             ? null
@@ -87,8 +91,8 @@ class VideoListItem extends StatelessWidget {
                         if (newLikedListIds.contains(indexx)) {
                           return GestureDetector(
                             onTap: () {
-                              // BlocProvider.of<FastLaughBloc>(context)
-                              //     .add(UnlikeVideo(id: indexx));
+                              BlocProvider.of<FastLaughBloc>(context)
+                                  .add(UnlikeVideo(id: indexx));
                               likedVideosIdsNotifier.value.remove(indexx);
                               likedVideosIdsNotifier.notifyListeners();
                             },
@@ -101,8 +105,8 @@ class VideoListItem extends StatelessWidget {
                         }
                         return GestureDetector(
                           onTap: () {
-                            // BlocProvider.of<FastLaughBloc>(context)
-                            //       .add(LikeVideo(id: _index));
+                            BlocProvider.of<FastLaughBloc>(context)
+                                .add(LikeVideo(id: indexx));
                             likedVideosIdsNotifier.value.add(indexx);
                             likedVideosIdsNotifier.notifyListeners();
                           },
@@ -183,7 +187,9 @@ class _FastLaughVideoPlayerState extends State<FastLaughVideoPlayer> {
   late VideoPlayerController _videoPlayerController;
   @override
   void initState() {
-    _videoPlayerController = VideoPlayerController.network(widget.videoUrl);
+    _videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(widget.videoUrl),
+    );
     _videoPlayerController.initialize().then((value) {
       setState(() {});
       _videoPlayerController.play();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/downloads/i_downloads_repo.dart';
+import '../../domain/downloads/downloads_service.dart';
 import '../../domain/downloads/models/downloads.dart';
 
 part 'fast_laugh_event.dart';
@@ -23,9 +23,14 @@ ValueNotifier<Set<int>> likedVideosIdsNotifier = ValueNotifier({});
 @injectable
 class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
   FastLaughBloc(
-    IDownloadsRepo downloadService,
+    DownloadsService downloadService,
   ) : super(FastLaughState.initial()) {
     on<Initialize>((event, emit) async {
+      if (state.videoslist.isNotEmpty) {
+        emit(state);
+        return;
+      }
+
       // Sending Loading to UI
       emit(const FastLaughState(
         videoslist: [],
@@ -34,7 +39,7 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
       ));
       // get trending movies
       final result = await downloadService.getDownloadsImages();
-      final state = result.fold((l) {
+      final states = result.fold((l) {
         return const FastLaughState(
           videoslist: [],
           isLoading: false,
@@ -47,17 +52,17 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
                 isError: false,
               ));
       // send to ui
-      emit(state);
+      emit(states);
     });
 
     on<LikeVideo>((event, emit) async {
       likedVideosIdsNotifier.value.add(event.id);
-      likedVideosIdsNotifier.notifyListeners();
+      // likedVideosIdsNotifier.notifyListeners();
     });
 
     on<UnlikeVideo>((event, emit) async {
       likedVideosIdsNotifier.value.remove(event.id);
-      likedVideosIdsNotifier.notifyListeners();
+      // likedVideosIdsNotifier.notifyListeners();
     });
   }
 }

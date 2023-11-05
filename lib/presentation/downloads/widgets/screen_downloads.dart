@@ -27,21 +27,29 @@ class _ScreenDownloadsState extends State<ScreenDownloads> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: AppBarWidget(
-            title: "Downloads",
+    return RefreshIndicator(
+      color: Colors.black54,
+      strokeWidth: 3,
+      onRefresh: () async {
+        BlocProvider.of<DownloadsBloc>(context)
+            .add(const DownloadsEvent.getDownloadsImage());
+      },
+      child: Scaffold(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: AppBarWidget(
+              title: "Downloads",
+            ),
           ),
-        ),
-        body: ListView.separated(
-          padding: const EdgeInsets.all(10),
-          itemBuilder: (context, index) => _widgetList[index],
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 25,
-          ),
-          itemCount: _widgetList.length,
-        ));
+          body: ListView.separated(
+            padding: const EdgeInsets.all(10),
+            itemBuilder: (context, index) => _widgetList[index],
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 25,
+            ),
+            itemCount: _widgetList.length,
+          )),
+    );
   }
 }
 
